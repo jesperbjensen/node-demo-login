@@ -1,0 +1,20 @@
+{
+  "name": "node_login_demo",
+  "version": "0.0.0",
+  "homepage": "https://github.com/deldy/node-demo-login",
+  "authors": [
+    "Jesper Blad Jensen <deldy@deldysoft.dk>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-css": "~3.1.1"
+  }
+}
