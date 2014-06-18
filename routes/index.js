@@ -1,7 +1,7 @@
 var express        = require('express');
 var _              = require('underscore');
 var userManagement = require('../userManagement.js');
-var when           = require('when');
+var bluebird       = require('bluebird');
 
 var router = express.Router();
 

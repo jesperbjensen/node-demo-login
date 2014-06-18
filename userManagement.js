@@ -1,7 +1,6 @@
-var when           = require('when');
+var bluebird       = require('bluebird');
 var models         = require('./models.js');
 var bcrypt         = require('bcrypt');
-var nodefn         = require('when/node');
 
 module.exports = function() {
 
@@ -16,21 +15,21 @@ module.exports = function() {
   };
 
   function findUser(email) {
-    return nodefn.call(models.User.findOne.bind(models.User), { email: email });
+    return bluebird.promisify(models.User.findOne.bind(models.User))({ email: email });
   }
 
   function validatePassword(obj, password) {
-    return nodefn.call(bcrypt.compare, password, obj.password).then(function(res) {
+    return bluebird.promisify(bcrypt.compare)(password, obj.password).then(function(res) {
         return {valid: res, user: obj};
     });
   }
 
   function saveUser(user) {
-    return nodefn.call(user.save.bind(user));
+    return bluebird.promisify(user.save.bind(user))();
   }
 
   function hashPassword(password) {
-    return nodefn.call(bcrypt.hash, password, 8);
+    return bluebird.promisify(bcrypt.hash)(password, 8);
   }
 
   var self = {
@@ -63,7 +62,7 @@ module.exports = function() {
     logout: function(res) {
       res.clearCookie('user');
     }
-    
+
   };
   return self;
 }();
